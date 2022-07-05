@@ -7,8 +7,11 @@ import {
   StatusBar,
   Image,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {format} from 'date-fns';
+
 import colors from '../constants/colors';
 
 import ConversionInput from '../components/ConversionInput';
@@ -16,7 +19,7 @@ import Button from '../components/Button';
 
 const screen = Dimensions.get('window');
 
-const Home = () => {
+const Home = ({navigation}) => {
   const baseCurrency = 'USD';
   const quoteCurrency = 'GBP';
   const conversionRate = 0.8345;
@@ -26,6 +29,14 @@ const Home = () => {
     <View style={styles.container}>
       <ScrollView>
         <StatusBar barStyle="light-content" backgroundColor={colors.blue} />
+
+        <SafeAreaView>
+          <TouchableOpacity
+            style={styles.header}
+            onPress={() => navigation.push('Options')}>
+            <Text style={styles.headerBtn}>&gt;&gt;&gt;</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
 
         <View style={styles.content}>
           <View style={styles.logoContainer}>
@@ -46,12 +57,16 @@ const Home = () => {
           <ConversionInput
             text={baseCurrency}
             value="123"
-            onButtonPress={() => alert('todo')}
+            onButtonPress={() =>
+              navigation.push('CurrencyList', {title: 'Base Currency'})
+            }
           />
           <ConversionInput
             text={quoteCurrency}
             value="123"
-            onButtonPress={() => alert('todo')}
+            onButtonPress={() =>
+              navigation.push('CurrencyList', {title: 'Quote Currency'})
+            }
           />
 
           <Text style={styles.text}>
@@ -74,7 +89,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.blue,
   },
   content: {
-    paddingTop: screen.height * 0.2,
+    paddingTop: screen.height * 0.1,
   },
   logoContainer: {
     justifyContent: 'center',
@@ -100,6 +115,14 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 13,
     textAlign: 'center',
+  },
+  header: {
+    alignItems: 'flex-end',
+    marginHorizontal: 20,
+  },
+  headerBtn: {
+    color: colors.white,
+    fontSize: 30,
   },
 });
 

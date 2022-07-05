@@ -1,5 +1,13 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, Linking, Alert} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  Linking,
+  Alert,
+  StatusBar,
+} from 'react-native';
+
+import colors from '../constants/colors';
 
 import RowItem from '../components/RowItem';
 import RowSeparator from '../components/RowSeparator';
@@ -10,9 +18,11 @@ const openUrl = url => {
   });
 };
 
-export default () => {
+const Options = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
+      <StatusBar barStyle="dark-content" backgroundColor={colors.white} />
+
       <ScrollView>
         <RowItem
           text="Themes"
@@ -40,3 +50,5 @@ export default () => {
     </SafeAreaView>
   );
 };
+
+export default Options;
