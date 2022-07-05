@@ -1,8 +1,6 @@
 import React from 'react';
-import Options from './screens/Options';
+import Navigation from './config/Navigation';
 
-const App = () => {
-  return <Options />;
-};
+const App = () => <Navigation />;
 
 export default App;
